@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> GitHub Profile Finder </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css ">
+    </head>
+    <body>
+        <div class = "container"> <div id="profile"></div> </div>
+        <script>
+            function getProfile(){
+                var username = 'elifbabaoglu2';
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if(xhttp.readyState == 4 && xhttp.status == 200){
+                        var user = JSON.parse(xhttp.responseText);
+                        document.getElementById('profile').innerHTML = `<div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            <h3 class="panel-title">${user.login}</h3>
+                                                                        </div>
+                                                                     <div class="panel-body">
+                                                                     <div class = "row">
+                                                                     <div class = "col-md-3">
+                                                                         <img src="${user.avatar_url}" >      
+                                                                     </div>
+                                                                     <div class = "col-md-9">
+                                                                    <ul class = "list-group">
+                                                                    <li> Website: ${user.events_url} </li>
+                                                                    <li> Website: ${user.repos_url} </li>
+                                                                    </ul>
+                                                                     </div>
+                                                                    </div>
+                                                                    </div>
+                                                                 </div>`;
+                   }
+                }
+                xhttp.open('GET', 'https://api.github.com/users/' + username, true);
+                xhttp.send();
+            }
+            getProfile();
+        </script>
+    </body>
+</html>
+
+
